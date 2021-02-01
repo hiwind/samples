@@ -1,7 +1,8 @@
 /*
+Created By: Jeremy Anderson
 
 Easily reference a layer by name and/or id, hide/show a layer, or swap the current visibility of a layer.
-Created By: Jeremy Anderson
+These functions are compatible with nearly every known browser and operating system, including backwards compatibility.
 
 Examples:
 <script>myDiv = Layer('divid');</script>
