@@ -5,6 +5,7 @@ Easily reference a layer by name and/or id, hide/show a layer, or swap the curre
 These functions are compatible with nearly every known browser and operating system, including backwards compatibility.
 
 Examples:
+<div id="divid" name="divid">Content</div>
 <script>myDiv = Layer('divid');</script>
 onClick="swapLayer('divid');"
 onMouseOver="showLayer('divid');"
