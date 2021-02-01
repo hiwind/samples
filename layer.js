@@ -1,3 +1,11 @@
+/*
+Easily reference a layer by name and/or id, hide/show a layer, or swap the current visibility of a layer.
+Examples
+<script>myDiv = Layer('divid');</script>
+onClick="swapLayer('divid');"
+onMouseOver="showLayer('divid');"
+onMouseOut="hideLayer('divid');";
+*/
 function Layer (yN) {
 	if (document.getElementById) {
 		return document.getElementById(yN);
