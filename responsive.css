@@ -1,0 +1,68 @@
+@media screen and (max-width:9999px) {
+	.layoutA {display:block; visibility:visible;}
+	.layoutB {display:none; visibility:hidden;}
+	.layoutC {display:none; visibility:hidden;}
+	.layoutD {display:none; visibility:hidden;}
+	.layoutAB {display:block; visibility:visible;}
+	.layoutAC {display:block; visibility:visible;}
+	.layoutAD {display:block; visibility:visible;}
+	.layoutBC {display:none; visibility:hidden;}
+	.layoutBD {display:none; visibility:hidden;}
+	.layoutCD {display:none; visibility:hidden;}
+	.layoutABC {display:block; visibility:visible;}
+	.layoutABD {display:block; visibility:visible;}
+	.layoutACD {display:block; visibility:visible;}
+	.layoutBCD {display:none; visibility:hidden;}
+	.layoutABCD {display:block; visibility:visible;}
+}
+@media screen and (max-width:1024px) {
+	.layoutA {display:none; visibility:hidden;}
+	.layoutB {display:block; visibility:visible;}
+	.layoutC {display:none; visibility:hidden;}
+	.layoutD {display:none; visibility:hidden;}
+	.layoutAB {display:block; visibility:visible;}
+	.layoutAC {display:none; visibility:hidden;}
+	.layoutAD {display:none; visibility:hidden;}
+	.layoutBC {display:block; visibility:visible;}
+	.layoutBD {display:block; visibility:visible;}
+	.layoutCD {display:none; visibility:hidden;}
+	.layoutABC {display:block; visibility:visible;}
+	.layoutABD {display:block; visibility:visible;}
+	.layoutACD {display:none; visibility:hidden;}
+	.layoutBCD {display:block; visibility:visible;}
+	.layoutABCD {display:block; visibility:visible;}
+}
+@media screen and (max-width:768px) {
+	.layoutA {display:none; visibility:hidden;}
+	.layoutB {display:none; visibility:hidden;}
+	.layoutC {display:block; visibility:visible;}
+	.layoutD {display:none; visibility:hidden;}
+	.layoutAB {display:none; visibility:hidden;}
+	.layoutAC {display:block; visibility:visible;}
+	.layoutAD {display:none; visibility:hidden;}
+	.layoutBC {display:block; visibility:visible;}
+	.layoutBD {display:none; visibility:hidden;}
+	.layoutCD {display:block; visibility:visible;}
+	.layoutABC {display:block; visibility:visible;}
+	.layoutABD {display:none; visibility:hidden;}
+	.layoutACD {display:block; visibility:visible;}
+	.layoutBCD {display:block; visibility:visible;}
+	.layoutABCD {display:block; visibility:visible;}
+}
+@media screen and (max-width:320px) {
+	.layoutA {display:none; visibility:hidden;}
+	.layoutB {display:none; visibility:hidden;}
+	.layoutC {display:none; visibility:hidden;}
+	.layoutD {display:block; visibility:visible;}
+	.layoutAB {display:none; visibility:hidden;}
+	.layoutAC {display:none; visibility:hidden;}
+	.layoutAD {display:block; visibility:visible;}
+	.layoutBC {display:none; visibility:hidden;}
+	.layoutBD {display:block; visibility:visible;}
+	.layoutCD {display:block; visibility:visible;}
+	.layoutABC {display:none; visibility:hidden;}
+	.layoutABD {display:block; visibility:visible;}
+	.layoutACD {display:block; visibility:visible;}
+	.layoutBCD {display:block; visibility:visible;}
+	.layoutABCD {display:block; visibility:visible;}
+}
