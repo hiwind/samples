@@ -1,30 +1,6 @@
 <?
 if (!function_exists('write_file')) {
 	function write_file ($_file_path, $_string = "", $_append = false, $_delete = false) {
-		global $_DATABASE;
-		if (isset($_DATABASE["sub_cmt"])) {
-			if (isset($_DATABASE["sub_cmt_local"])) {
-				$_sc = $_DATABASE["sub_cmt_local"];
-			}
-			else {
-				$_sc = $_DATABASE["sub_cmt"];
-			}
-			if (strlen($_sc) > 0) {
-				if (strstr($_file_path, "/files")) {
-					if (strstr($_file_path, ".inc")) {
-						if (!strstr($_file_path, $_sc . ".inc")) {
-							if (isset($_DATABASE["debug_sub_cmt"])) {
-								print "OLD FILE PATH: " . $_file_path . "<br>";
-							}
-							$_file_path = str_replace(".inc", $_sc . ".inc", $_file_path);
-							if (isset($_DATABASE["debug_sub_cmt"])) {
-								print "NEW FILE PATH: " . $_file_path . "<br>";
-							}
-						}
-					}
-				}
-			}
-		}
 		if ($_append) {
 			$_file = fopen($_file_path, "a+");
 		}
