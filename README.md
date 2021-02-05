@@ -2,5 +2,6 @@ layers.js - Easily reference a layer by name and/or id, hide/show a layer, or sw
 
 ajax.js - simple, universal, multi-threaded AJAX request.
 
-mysql.php - simple, universal, mysql functions for php
+mysql.php - simple, universal, mysql functions for php.
 
+responsive.css - simple responsive css layouts.
