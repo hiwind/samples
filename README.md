@@ -20,6 +20,10 @@ php_compat.php - Quickly define backwards compatible global php variables such a
 
 responsive.css - Simple responsive css layouts to hide & show elements by classname on 4 different device sizes.
 
+tables.css - Backwards compatible classes for tables, table rows, and table cells.
+
+twitter_links.php - Add absolute twitter links to usernames and hashtags in text.
+
 vars.php - Quickly collect backwards compatible GET and POST variables into a single variable.
 
 write_files.php - Easily create, rewrite, append & delete files. Includes a safer method for rewriting files if the content would not be changed.
