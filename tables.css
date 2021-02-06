@@ -1,0 +1,14 @@
+.table {
+	width:100%;
+	margin:0 auto;
+	-dt-display: table;
+	display:table;
+}
+.row {
+	display: table-row;
+}
+.cell {
+	-dt-display: table-cell;
+	display:table-cell;
+	vertical-align:top;
+}
