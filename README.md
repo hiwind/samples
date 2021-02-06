@@ -4,6 +4,8 @@ check_credit_card.php - Check major credit card types for correct syntax and imp
 
 combine_dates.php - Better display for 2 YYYYMMDD dates (Ex: Jan 1-10, 2021 instead of Jan 1, 2021 - Jan 10, 2021).
 
+contracode.js - up, up, down, down, left, right, left, right, b, a, space!
+
 email_functions.php - Encode email address to reduce spam and check email address for syntax validity.
 
 get_directory.php - Get sorted information about sub-directories, files, and symlinks within a directory.
