@@ -22,7 +22,7 @@ responsive.css - Simple responsive css layouts to hide & show elements by classn
 
 tables.css - Backwards compatible classes for tables, table rows, and table cells.
 
-twitter_links.php - Add absolute twitter links to usernames and hashtags in text.
+twitter_link.php - Add absolute twitter links to usernames and hashtags in text.
 
 vars.php - Quickly collect backwards compatible GET and POST variables into a single variable.
 
