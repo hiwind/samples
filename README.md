@@ -10,6 +10,8 @@ email_functions.php - Encode email address to reduce spam and check email addres
 
 get_directory.php - Get sorted information about sub-directories, files, and symlinks within a directory.
 
+how_far_between.php - Determine distance (miles, yards, feet, inches, kilometers, meters, centimeters) between 2 points on earth.
+
 layer.js - Easily reference a layer by name and/or id, hide/show a layer, or swap the current visibility of a layer. These functions are compatible with nearly every known browser and operating system, including backwards compatibility.
 
 make_img_responsive.php - Override fixed width/height <img> tags to scale responsively.
