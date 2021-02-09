@@ -1,4 +1,9 @@
 <?
+if (!function_exists('ereg_replace')) {
+	function ereg_replace ($_a, $_b) {
+		return preg_replace("/" . $_a . "/", $_b);
+	}
+}
 if (!function_exists('db_error')) {
 	function db_error ($_err, $_query = "", $_errors_to=array()) {
 		global $_SERVER;
