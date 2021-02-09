@@ -1,0 +1,63 @@
+<html>
+<head>
+<script>
+function how_far_between (latOrigin, lonOrigin, latDestination, lonDestination) {
+	var feet_in_a_mile = 5280;
+	var kilometers_in_a_mile = 1.609344;
+	var minutes_in_a_degree = 60;
+	var miles_in_a_nautical_mile = 1.1515;
+	var feet_in_a_yard = 3;
+	var inches_in_a_foot = 12;
+	var meters_in_a_kilometer = 1000;
+		
+	var radlatOrigin = Math.PI * latOrigin / 180;
+	var radlatDestination = Math.PI * latDestination / 180;
+	var theta = lonOrigin - lonDestination;
+	var radtheta = Math.PI * theta / 180;
+	var miles = Math.sin(radlatOrigin) * Math.sin(radlatDestination) + Math.cos(radlatOrigin) * Math.cos(radlatDestination) * Math.cos(radtheta);
+	if (miles > 1) {
+		miles = 1;
+	}
+	miles = Math.acos(miles);
+	miles = miles * 180/Math.PI;
+	miles = miles * minutes_in_a_degree * miles_in_a_nautical_mile;
+	return {
+		"miles" : miles,
+		"yards": miles * (feet_in_a_mile/feet_in_a_yard),
+		"feet": miles * feet_in_a_mile,
+		"inches": miles * feet_in_a_mile * inches_in_a_foot,
+		"kilometers": miles * kilometers_in_a_mile,
+		"meters": miles * kilometers_in_a_mile * meters_in_a_kilometer,
+		"centimeters": miles * kilometers_in_a_mile * meters_in_a_kilometer * meters_in_a_kilometer
+	};
+}
+function getCurrentPosition() {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		var lat = position.coords.latitude;
+		var lon = position.coords.longitude;
+		latText = lat.toFixed(4);
+		longText = lon.toFixed(4);
+		getDistance = how_far_between(lat, lon, 43.0389, -87.9065);
+		
+		var result = "";
+		for (var key in getDistance) {
+			result = result + key + ": " + getDistance[key] + "\n";
+		}
+		alert(result);
+	});
+}
+function getGreenBayToMilwaukee() {
+	getDistance = how_far_between(44.5133, -88.0133, 43.0389, -87.9065);
+	var result = "";
+	for (var key in getDistance) {
+		result = result + key + ": " + getDistance[key] + "\n";
+	}
+	alert(result);
+}
+</script>
+</head>
+<body bgcolor="#ffffff">
+<input type="submit" value="Current Location -> Milwaukee, WI" onClick="getCurrentPosition(); this.blur(); return false;">
+<input type="submit" value="Green Bay -> Milwaukee, WI" onClick="getGreenBayToMilwaukee(); this.blur(); return false;">
+</body>
+</html>
