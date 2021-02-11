@@ -1,7 +1,7 @@
 <?
 if (!function_exists('ereg_replace')) {
-	function ereg_replace ($_a, $_b) {
-		return preg_replace("/" . $_a . "/", $_b);
+	function ereg_replace ($_a, $_b, $_c) {
+		return preg_replace("/" . $_a . "/", $_b, $_c);
 	}
 }
 if (!function_exists('check_digit')) {
