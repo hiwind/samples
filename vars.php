@@ -5,7 +5,7 @@ if (!function_exists('ereg')) {
 	}
 }
 if (!function_exists('ereg_replace')) {
-	function ereg ($_a, $_b) {
+	function ereg_replace ($_a, $_b) {
 		return preg_replace("/" . $_a . "/", $_b);
 	}
 }
