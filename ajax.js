@@ -1,3 +1,5 @@
+debug = false;
+
 pX.prototype.rQ = undefined;
 function pX () {
 }
@@ -36,48 +38,62 @@ pX.prototype.load = function (gP, gQ) {
 pX.prototype._onData = function() {
 	if (this.rQ.readyState == 4) {
 		if (this.rQ.status == 200) {
-			//alert(this.rQ.responseText);
+			if (debug) {
+				alert(this.rQ.responseText);
+			}
 			this.aN = parseInt(this.rQ.responseText.substr(0, this.rQ.responseText.indexOf('\n')));
 			this.aL = this.rQ.responseText.split('\n', this.aN);
-			for (this.aJ=2; this.aJ<this.aL.length; this.aJ++) {
-				this.aT = this.aL[this.aJ];
-				if (this.aT.indexOf('|') > 0) {
-					this.aC = this.aT.split('|', 3);
-					if (this.aC[0] == 'function') {
-						//alert(this.aC[2]);
-						setTimeout(this.aC[2], 1);
-					}
-					else {
-						this.aD = fL(this.aC[0]);
-						if (this.aD) {
-							if (this.aC[1] == 'v') {
-								this.aD.value = this.aC[2];
-							}
-							else if (this.aC[1] == 'i') {
-								this.aD.innerHTML = this.aC[2];
-							}
-							else if (this.aC[1] == 'c') {
-								this.aD.style.color = '#' + this.aC[2];
-							}
-							else if (this.aC[1] == 'ht') {
-								this.aD.style.height = this.aC[2];
-							}
-							else if (this.aC[1] == 's') {
-								if (this.aC[2] == '1') {
-									this.aD.style.visibility = 'visible';
-									this.aD.style.display = 'block';
-								}
-								else {
-									this.aD.style.visibility = 'hidden';
-									this.aD.style.display = 'none';
-								}
-							}
-							else {
-								this.aD.innerHTML = this.aC[2];
-							}
+			if (this.rQ.responseText.substr(0, 9) == "response=") {
+				this.aC = this.rQ.responseText.split('\n', 2);
+				this.aT = this.aC[0].split('response=', 2);
+				this.aD = fL(this.aT[1]);
+				if (this.aD) {
+					this.aD.innerHTML = this.rQ.responseText.substr(this.rQ.responseText.indexOf('\n')+1);
+				}
+			}
+			else {
+				for (this.aJ=1; this.aJ<this.aL.length; this.aJ++) {
+					this.aT = this.aL[this.aJ];
+					if (this.aT.indexOf('|') > 0) {
+						this.aC = this.aT.split('|', 3);
+						if (this.aC[0] == 'function') {
+							setTimeout(this.aC[2], 1);
 						}
 						else {
-							//alert('no - ' + this.aC[0]);
+							this.aD = fL(this.aC[0]);
+							if (this.aD) {
+								if (this.aC[1] == 'v') {
+									this.aD.value = this.aC[2];
+								}
+								else if (this.aC[1] == 'i') {
+									this.aD.innerHTML = this.aC[2];
+								}
+								else if (this.aC[1] == 't') {
+									this.aD.innerText = this.aC[2];
+								}
+								else if (this.aC[1] == 'c') {
+									this.aD.style.color = '#' + this.aC[2];
+								}
+								else if (this.aC[1] == 'ht') {
+									this.aD.style.height = this.aC[2];
+								}
+								else if (this.aC[1] == 'wt') {
+									this.aD.style.width = this.aC[2];
+								}
+								else if (this.aC[1] == 's') {
+									if (this.aC[2] == '1') {
+										this.aD.style.visibility = 'visible';
+										this.aD.style.display = 'block';
+									}
+									else {
+										this.aD.style.visibility = 'hidden';
+										this.aD.style.display = 'none';
+									}
+								}
+								else {
+									this.aD.innerHTML = this.aC[2];
+								}
+							}
 						}
 					}
 				}

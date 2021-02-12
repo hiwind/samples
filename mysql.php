@@ -1,7 +1,7 @@
 <?
 if (!function_exists('ereg_replace')) {
-	function ereg_replace ($_a, $_b, $_c) {
-		return preg_replace("/" . $_a . "/", $_b, $_c);
+	function ereg_replace ($_a, $_b) {
+		return preg_replace("/" . $_a . "/", $_b);
 	}
 }
 if (!function_exists('db_error')) {
@@ -84,7 +84,7 @@ if (!function_exists('db_connect')) {
 	}
 }
 if (!function_exists('db_query')) {
-	function db_query ($_dbid, $_query, $_skip_log = false) {
+	function db_query ($_dbid, $_query) {
 		if (function_exists('mysql_query')) {
 			if(!($_result = mysql_query($_query, $_dbid))) {
 				db_error(mysql_errno($_dbid) . ": " . mysql_error($_dbid), $_query);
@@ -135,6 +135,16 @@ if (!function_exists('db_row')) {
 		}
 		else {
 			return mysqli_fetch_row($_result);
+		}
+	}
+}
+if (!function_exists('db_row_assoc')) {
+	function db_row_assoc ($_result) {
+		if (function_exists('mysql_fetch_assoc')) {
+			return mysql_fetch_assoc($_result);
+		}
+		else {
+			return mysqli_fetch_assoc($_result);
 		}
 	}
 }
@@ -191,6 +201,18 @@ if (!function_exists('db_uid')) {
 			}
 		}
 		return $_token;
+	}
+}
+if (!function_exists('db_row_from_query')) {
+	function db_row_from_query ($_db, $_query) {
+		$_result = db_query($_db, $_query);
+		if (db_rowfields($_result)) {
+			$_row = db_row_assoc($_result);
+		}
+		else {
+			$_row = array();
+		}
+		return $_row;
 	}
 }
 if (!function_exists('is_empty')) {
