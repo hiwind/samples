@@ -2,6 +2,7 @@ zoom = 1;
 zoomMax = 1.5;
 zoomMin = 1;
 zoomIncrement = 0.05;
+zoomDefault = zoom;
 function zoomTo (zoomLevel) {
 	boDY = document.body;
 	if (boDY) {
@@ -12,10 +13,13 @@ function zoomTo (zoomLevel) {
 		else if (zoom > zoomMax) {
 			zoom = zoomMax;
 		}
+		if (zoom == zoomDefault) {
+			removeZoomCookie('zoom');
+		}
 		boDY.style.transform = 'scale(' + zoom + ')';
 		boDY.style.transformOrigin = '0 0 0 0';
 		boDY.style.width = (100/zoom) + '%';
-		setCookie('zoom', zoom);
+		setZoomCookie('zoom', zoom);
 	}
 	return false;
 }
