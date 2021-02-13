@@ -69,5 +69,10 @@ function getZoomCookie(name) {
 	return "";
 }
 zoomSaved = getZoomCookie('zoom');
+zoomSaved = getZoomCookie('zoom');
 if (zoomSaved.length > 0) {
 	zoomTo(zoomSaved);
+}
+else if (zoom != 1) {
+	zoomTo(zoom);
+}
