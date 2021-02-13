@@ -20,34 +20,13 @@ function zoomTo (zoomLevel) {
 	return false;
 }
 function zoomIn () {
-	boDY = document.body;
-	if (boDY) {
-		zoom += zoomIncrement;
-		if (zoom > zoomMax) {
-			zoom = zoomMax;
-		}
-		boDY.style.transform = 'scale(' + zoom + ')';
-		boDY.style.transformOrigin = '0 0 0 0';
-		boDY.style.width = (100/zoom) + '%';
-		setZoomCookie('zoom', zoom);
-	}
-	return false;
+	zoom += zoomIncrement;
+	return zoomTo(zoom);
 }
 function zoomOut () {
-	boDY = document.body;
-	if (boDY) {
-		zoom -= zoomIncrement;
-		if (zoom < zoomMin) {
-			zoom = zoomMin;
-		}
-		boDY.style.transform = 'scale(' + zoom + ')';
-		boDY.style.transformOrigin = '0 0 0 0';
-		boDY.style.width = (100/zoom) + '%';
-		setZoomCookie('zoom', zoom);
-	}
-	return false;
+	zoom -= zoomIncrement;
+	return zoomTo(zoom);
 }
-
 function setZoomCookie (name, value) {
 	document.cookie = name + '=' + value + '; expires=Thu, 31 Dec 2099 12:00:00 UTC; path=/';
 }
