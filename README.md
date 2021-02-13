@@ -31,3 +31,5 @@ twitter_link.php - Add absolute twitter links to usernames and hashtags in text.
 vars.php - Quickly collect backwards compatible GET and POST variables into a single variable.
 
 write_files.php - Easily create, rewrite, append & delete files. Includes a safer method for rewriting files if the content would not be changed.
+
+zoom-document.js - Zoom entire website page in and out by scaling the body tag. Also supports shift- or shift+ keyboard inputs to zoom.
