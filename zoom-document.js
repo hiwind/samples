@@ -13,13 +13,15 @@ function zoomTo (zoomLevel) {
 		else if (zoom > zoomMax) {
 			zoom = zoomMax;
 		}
+		boDY.style.transform = 'scale(' + zoom + ')';
+		boDY.style.transformOrigin = '0 0';
+		boDY.style.width = (100/zoom) + '%';
 		if (zoom == zoomDefault) {
 			removeZoomCookie('zoom');
 		}
-		boDY.style.transform = 'scale(' + zoom + ')';
-		boDY.style.transformOrigin = '0 0 0 0';
-		boDY.style.width = (100/zoom) + '%';
-		setZoomCookie('zoom', zoom);
+		else {
+			setZoomCookie('zoom', zoom);
+		}
 	}
 	return false;
 }
