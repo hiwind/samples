@@ -34,10 +34,10 @@ document.onkeydown = function(evt) {
 	evt = evt || window.event;
 	if (event.shiftKey) {
 		if ("key" in evt) {
-			if (evt.key === "-") {
+			if (evt.key === "+") {
 				zoomIn();
 			}
-			else if (evt.key === "+") {
+			else if (evt.key === "-") {
 				zoomOut();
 			}
 		}
