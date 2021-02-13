@@ -50,11 +50,11 @@ document.onkeydown = function(evt) {
 	evt = evt || window.event;
 	if (event.shiftKey) {
 		if ("key" in evt) {
-			if (evt.key === "+") {
-				zoomIn();
-			}
-			else if (evt.key === "-") {
+			if ((evt.key === "_") || (evt.key === "-")) {
 				zoomOut();
+			}
+			else if ((evt.key === "+") || (evt.key === "=")) {
+				zoomIn();
 			}
 		}
 		else {
