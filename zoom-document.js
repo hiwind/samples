@@ -3,6 +3,34 @@ zoomMax = 1.5;
 zoomMin = 1;
 zoomIncrement = 0.05;
 zoomDefault = zoom;
+
+/*
+// add keydown tracking into page to capture  shift- and shift+ to zoom
+<script>
+	document.onkeydown = function(evt) {
+		evt = evt || window.event;
+		if (event.shiftKey) {
+			if ("key" in evt) {
+				if ((evt.key === "_") || (evt.key === "-")) {
+					zoomOut();
+				}
+				else if ((evt.key === "+") || (evt.key === "=")) {
+					zoomIn();
+				}
+			}
+			else {
+				if (evt.keyCode == 187) {
+					zoomIn();
+				}
+				else if (evt.keyCode == 189) {
+					zoomOut();
+				}
+			}
+		}
+	};
+</script>
+*/
+
 function zoomTo (zoomLevel) {
 	boDY = document.body;
 	if (boDY) {
@@ -53,7 +81,6 @@ function getZoomCookie(name) {
 	}
 	return "";
 }
-zoomSaved = getZoomCookie('zoom');
 zoomSaved = getZoomCookie('zoom');
 if (zoomSaved.length > 0) {
 	zoomTo(zoomSaved);
