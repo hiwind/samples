@@ -5,7 +5,7 @@ zoomIncrement = 0.05;
 zoomDefault = zoom;
 
 /*
-// add keydown tracking into page to capture  shift- and shift+ to zoom
+// add keydown tracking into page to capture shift- and shift+ to zoom
 <script>
 	document.onkeydown = function(evt) {
 		evt = evt || window.event;
