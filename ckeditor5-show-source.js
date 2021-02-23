@@ -1,4 +1,5 @@
 var CKEditorSourceID = "ckeditor5";
+var CKEditorSource = false;
 
 // <textarea name="ckeditor5" id="ckeditor5"></textarea>
 // <input type="button" onClick="this.blur(); return showSource();" value="Source Toggle">
@@ -45,6 +46,22 @@ function LayerValue (nM) {
 function setLayerValue (nM, vL) {
 	if (Layer(nM)) {
 		Layer(nM).value = vL;
+	}
+}
+function getCurrentValue () {
+	if (editor != null) {
+		window.editor = editor;
+	}
+	if (window.editor != null) {
+		if (CKEditorSource) {
+			return LayerValue(CKEditorSourceID);
+		}
+		else {
+			return window.editor.getData();
+		}
+	}
+	else {
+		return LayerValue(CKEditorSourceID);
 	}
 }
 function showSource() {
