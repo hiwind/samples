@@ -1,5 +1,8 @@
 var CKEditorSourceID = "ckeditor5";
 
+// <textarea name="ckeditor5" id="ckeditor5"></textarea>
+// <input type="button" onClick="this.blur(); return showSource();" value="Source Toggle">
+
 function Layer (nM) {
 	if (document.getElementById) {
 		return document.getElementById(nM);
@@ -70,4 +73,5 @@ function showSource() {
 			CKEditorSource = true;
 		}
 	}
+	return false;
 }
