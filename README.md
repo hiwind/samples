@@ -1,5 +1,7 @@
 ajax.js - Simple, universal, multi-threaded AJAX request. Includes methods (easily expanded based on needs) to update content and execute functions based on AJAX response.
 
+ckeditor5-show-source.js - Toggle the view to & from a CKEditor5 instance and Textarea to view/edit source html.
+
 check_credit_card.php - Check major credit card types for correct syntax and impossible/possible credit card number.
 
 combine_dates.php - Better display for 2 YYYYMMDD dates (Ex: Jan 1-10, 2021 instead of Jan 1, 2021 - Jan 10, 2021).
