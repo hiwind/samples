@@ -4,7 +4,7 @@ $_primes = "2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 
 
 $_find_primes = "2 "; // Note the first possible prime (the only even prime)
 
-$_i = 3; // Start at the first add prime and loop from there
+$_i = 3; // Start at the first odd prime and loop from there
 
 print "\n\nFirst 10,000 Primes: ";
 while ($_i <= 104729) { // 104729 is the 10,000th prime
