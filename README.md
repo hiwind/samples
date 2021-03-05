@@ -24,6 +24,8 @@ mysql.php - Simple, universal, mysql functions for php. Includes long and short 
 
 php_compat.php - Quickly define backwards compatible global php variables such as REQUEST_URI and DOCUMENT_ROOT.
 
+primes.php - Method to find the first 10,000 prime numbers.
+
 responsive.css - Simple responsive css layouts to hide & show elements by classname on 4 different device sizes.
 
 tables.css - Backwards compatible classes for tables, table rows, and table cells.
