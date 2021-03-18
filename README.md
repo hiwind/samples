@@ -16,6 +16,8 @@ how_far_between.html - Determine distance (miles, yards, feet, inches, kilometer
 
 how_far_between.php - Determine distance (miles, yards, feet, inches, kilometers, meters, centimeters) between 2 points on Earth.
 
+javascript-calendar.html - Pure JavaScript calendar to display 1 month at a time and tap/click to populate visible and/or hidden fields.
+
 layer.js - Easily reference a layer by name and/or id, hide/show a layer, or swap the current visibility of a layer. These functions are compatible with nearly every known browser and operating system, including backwards compatibility.
 
 make_img_responsive.php - Override fixed width/height <img> tags to scale responsively.
