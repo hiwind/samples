@@ -1,0 +1,186 @@
+<html>
+<head>
+<script>
+var cES = '', cAS = '', cZS = '', cGS = false, cNS = ''; cHS = '';
+function calendarLayer(cQ) {
+	return document.getElementById(cQ);
+}
+function calendarStyle() {
+	var cSS = document.createElement('style');
+	cSS.textContent = '.calendardiv {margin:0 auto; text-align:center;} .calendar select {font-size:14px; cursor:hand;} .calendarheader, .tableheader {display:block; text-align:center; margin:0 auto;} .calendar, .table {-dt-display:table; display:table;} .calendar .row {-dt-display:table-row; display:table-row;} .calendar .cell {cursor:hand; -dt-display:table-cell; display:table-cell; vertical-align:top; text-align:right; background-color:#ffffff; padding:3px; border:1px solid #f0f0f0; border-radius:3px;} .calendar {border-collapse:separate; border-spacing:2px; margin:0 auto;} .calendar .days .cell {cursor:default; text-align:center; font-weight:600;} .calendar .early, .calendar .late {color:#999999;} #calendarMonth, #calendarYear {border:0px; -webkit-appearance:none; outline:none; border:1px solid #f0f0f0; border-radius:3px; padding:2px 3px 2px 3px; } #calendarPrev, #calendarNext {text-decoration:none; font-size:20px; color:#999999; margin:0px 3px 0px 3px;}';
+	document.head.append(cSS);
+	
+	if (!calendarLayer(cES)) {
+		var cED = document.createElement('div');
+		cED.id = cES;
+		cED.className = 'calendardiv';
+		document.body.append(cED);
+	}
+	if (!calendarLayer(cNS)) {
+		var cND = document.createElement('div');
+		cND.id = cNS;
+		cND.className = 'calendardiv';
+		document.body.append(cND);
+	}
+	if (!calendarLayer(cHS)) {
+		var cHD = document.createElement('div');
+		cHD.id = cHS;
+		cHD.className = 'calendardiv';
+		document.body.append(cHD);
+	}
+}
+function calendarHeader(cE, cY, cM, cA, cZ) {
+	var ret = [];
+	var cAY = parseInt(cA.substr(0, 4));
+	var cZY = parseInt(cZ.substr(0, 4));
+	ret.push('<a href="#" onClick="this.blur(); return calendarUpdate(-1);" id="calendarPrev">&#0171;</a>');
+	ret.push('&nbsp;<select id="calendarMonth" onChange="calendarUpdate(0);">');
+	for (i=1; i<=12; i++) {
+		ret.push('<option value="' + i + '"' + (cM == i ? ' selected' : '') + '>' + new Date(i + '/01/' + cY).toLocaleString('default', { month: 'long' }) + '</option>');
+	}
+	ret.push('</select>');
+	ret.push('&nbsp;<select id="calendarYear" onChange="calendarUpdate(0);">');
+	for (i=cZY; i>=cAY; i--) {
+		ret.push('<option value="' + i + '"' + (cY == i ? ' selected' : '') + '>' + i + '</option>');
+	}
+	ret.push('</select>');
+	ret.push('&nbsp;<a href="#" onClick="this.blur(); return calendarUpdate(1);" id="calendarNext">&#0187;</a>');
+	return ret.join('');
+}
+function cX (cW) {
+	var cR = cW.split('/', 3);
+	if (cR[0].length < 2) { cR[0] = '0' + cR[0]; }
+	if (cR[1].length < 2) { cR[1] = '0' + cR[1]; }
+	var cU = cR.join('/');
+	var cV = cR[2] + '-' + cR[0] + '-' + cR[1];
+	calendarLayer(cNS).innerHTML = cU;
+	calendarLayer(cHS).innerHTML = cV;
+	return false;
+}
+function tableHeader(cB, cN) { return '<div class="tableheader' + cN + '">' + cB + '</div>'; }
+function table(cB, cN) { return '<div class="table' + cN + '">' + cB; }
+function row(cB, cN) { return '<div class="row' + cN + '">' + cB; }
+function cell(cB, cN, cK) { if (cK == null) { cK = ''; } return '<div class="cell' + cN + '"' + (cK.length > 0 ? ' onClick="' + cK + '"' : '') + '>' + cB + '</div>'; }
+function rowEnd(cB) { return cB + '</div>'; }
+function tableEnd(cB) { return cB + '</div>'; }
+function calendarValidate (cY, cM, cA, cZ, cAM, cAZ) {
+	var n = new Date();
+	if ((!parseInt(cY)) || (cY.length != 4)) { cY = '' + n.getFullYear(); }
+	if (!parseInt(cM)) { cM = '' + n.getMonth(); }
+	if (cM.length == 1) { cM = '0' + cM; }
+	var cF = parseInt(cY + cM + '01');
+	if (cA.length == 0) { cA = cAM; } else if (parseInt(cA) < parseInt(cAM)) { cA = cAM; }
+	if (cZ.length == 0) { cZ = cAZ; } else if (parseInt(cZ) > parseInt(cAZ)) { cZ = cAZ; }
+	if (cF > cZ) { cY = parseInt(cZ.substr(0, 4)); cM = parseInt(cZ.substr(4, 2)); }
+	else if (cF < cA) { cY = parseInt(cA.substr(0, 4)); cM = parseInt(cA.substr(4, 2)); }
+	cY = parseInt(cY);
+	cM = parseInt(cM);
+	return [cY, cM, cA, cZ];
+}
+function calendarSpecs(cY, cM) {
+	var dim = new Date(cY, cM, 0).getDate();
+	var dip = new Date(cY, cM-1, 0).getDate();
+	var d = new Date(cM + '/01/' + cY);
+	var w = d.getDay();
+	return [dim, dip, d, w];
+}
+function calendarQuery (cY, cM) {
+	var urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.has('y')) { cY = urlParams.get('y'); }
+	if (urlParams.has('m')) { cM = urlParams.get('m'); }
+	return [cY, cM];
+}
+function calendarInit(cE, cY, cM, cA, cZ, cN, cG, cH) {
+	[cY, cM] = calendarQuery(cY, cM);
+	[cY, cM, cA, cZ] = calendarValidate(cY, cM, cA, cZ, '19000101', '20991231');
+	cES = cE;
+	cAS = cA;
+	cZS = cZ;
+	cNS = cN;
+	cGS = cG;
+	cHS = cH;
+	calendarStyle();
+	calendar(cE, cY, cM, cA, cZ);
+}
+function calendarDefault(cE, cN, cG, cA, cZ) {
+	calendarInit(cE, '', '', cA, cZ, cN, cG);
+}
+function calendarUpdate(cD) {
+	cYL = calendarLayer('calendarYear');
+	cML = calendarLayer('calendarMonth');
+	if (cYL && cML) {
+		if (cD != 0) {
+			cYN = cYL.selectedIndex;
+			cMN = cML.selectedIndex + cD;
+			if (cMN < 0) { cMN = cML.options.length - 1; cYN++; }
+			else if (cMN >= cML.options.length) { cMN = 0; cYN--; }
+			if (cYN < 0) { cYN = cYL.options.length - 1; }
+			else if (cYN >= cYL.options.length) { cYN = 0; }
+			cYL.selectedIndex = cYN;
+			cML.selectedIndex = cMN;
+		}
+		cYV = parseInt(cYL.options[cYL.selectedIndex].value);
+		cMV = parseInt(cML.options[cML.selectedIndex].value);
+		calendar(cES, cYV, cMV, cAS, cZS);
+	}
+	return false;
+}
+function calendar(cE, cY, cM, cA, cZ) {
+	[dim, dip, d, w] = calendarSpecs(cY, cM);
+	if (cGS) { console.log([cY, cM, cA, cZ, dim, dip, d, w]); }
+	var j = 0;
+	var ret = [];
+	ret.push(tableHeader(calendarHeader(cE, cY, cM, cA, cZ), ' calendar'));
+	ret.push(table('', ' calendar'));
+	ret.push(row('', ' days'));
+	ret.push(cell('S', '') + cell('M', '') + cell('T', '') + cell('W', '') + cell('T', '') + cell('F', '') + cell('S', ''));
+	ret.push(rowEnd(''));
+	if (w > 0) {
+		var s = dip - w + 1;
+		ret.push(row('', ''));
+		for (i=s; i<=dip; i++) {
+			j++;
+			cYH = cY;
+			cMH = cM - 1;
+			cDH = i;
+			cAC = true;
+			if (cMH < 1) { cMH = 12; cYH--; }
+			if (cYH < 1900) { cMH = 1; cDH = 1; cYH = 1900; cAC = false }
+			ret.push(cell(i, ' early', (cAC ? 'cX(\'' + cMH + '/' + cDH + '/' + cYH + '\')' : '')));
+		}
+	}
+	if (j == 0) {
+		ret.push(row('', ''));
+	}
+	for (i=1; i<=dim; i++) {
+		if (j >= 7) {
+			ret.push(rowEnd(''));
+			ret.push(row('', ''));
+			j = 0;
+		}
+		j++;
+		ret.push(cell(i, '', 'cX(\'' + cM + '/' + i + '/' + cY + '\')'));
+	}
+	if (j < 7) {
+		i = 0;
+		while (j < 7) {
+			i++;
+			cYH = cY;
+			cMH = cM + 1;
+			cDH = i;
+			cAC = true;
+			if (cMH > 12) { cMH = 1; cYH++; }
+			if (cYH > 2099) { cMH = 12; cDH = 31; cYH = 2099; cAC = false; }
+			ret.push(cell(i, ' late', (cAC ? 'cX(\'' + cMH + '/' + cDH + '/' + cYH + '\')' : '')));
+			j++;
+		}
+	}
+	ret.push(rowEnd(''));
+	ret.push(tableEnd(''));
+	calendarLayer(cE).innerHTML = ret.join('');
+}
+</script>
+</head>
+<body onLoad="calendarDefault('c', 'cn', false, '20200101', '20221231');">
+</body>
+</html>
