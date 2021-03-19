@@ -7,7 +7,7 @@ function calendarLayer(cQ) {
 }
 function calendarStyle() {
 	var cSS = document.createElement('style');
-	cSS.textContent = '.calendardiv {margin:0 auto; text-align:center;} .calendar select {font-size:14px; cursor:hand;} .calendarheader, .tableheader {display:block; text-align:center; margin:0 auto;} .calendar, .table {-dt-display:table; display:table;} .calendar .row {-dt-display:table-row; display:table-row;} .calendar .cell:hover {border:1px solid #cc9999;} .calendar .days .cell:hover {border:1px solid #f0f0f0;}.calendar .cell {cursor:hand; -dt-display:table-cell; display:table-cell; vertical-align:top; text-align:right; background-color:#ffffff; padding:3px; border:1px solid #f0f0f0; border-radius:3px;} .calendar {border-collapse:separate; border-spacing:2px; margin:0 auto;} .calendar .days .cell {cursor:default; text-align:center; font-weight:600;} .calendar .early, .calendar .late {color:#999999;} #calendarMonth, #calendarYear {border:0px; -webkit-appearance:none; outline:none; border:1px solid #f0f0f0; border-radius:3px; padding:2px 3px 2px 3px; } #calendarPrev, #calendarNext {text-decoration:none; font-size:20px; color:#999999; margin:0px 3px 0px 3px;} #calendarNext:hover, #calendarPrev:hover {color:#cc9999;} #calendarMonth:hover, #calendarYear:hover {border-color:#cc9999;}';
+	cSS.textContent = '.calendardiv {margin:0 auto; text-align:center;} .calendar select {font-size:14px; cursor:hand;} .calendarheader, .tableheader {display:block; text-align:center; margin:0 auto;} .calendar, .table {-dt-display:table; display:table;} .calendar .row {-dt-display:table-row; display:table-row;} .calendar .cell:hover {border:1px solid #cc9999;} .calendar .days .cell:hover {border:1px solid #f0f0f0;}.calendar .cell {cursor:hand; -dt-display:table-cell; display:table-cell; vertical-align:top; text-align:right; background-color:#ffffff; padding:3px; border:1px solid #f0f0f0; border-radius:3px;} .calendar {border-collapse:separate; border-spacing:2px; margin:0 auto;} .calendar .days .cell {cursor:default; text-align:center; font-weight:600;} .calendar .early, .calendar .late {color:#999999;} #calendarMonth, #calendarYear {border:0px; -webkit-appearance:none; outline:none; border:1px solid #f0f0f0; border-radius:3px; padding:2px 3px 2px 3px; } .calendarPrev, .calendarNext {text-decoration:none; font-size:20px; color:#999999; margin:0px 3px 0px 3px;} .calendarNext:hover, .calendarPrev:hover {color:#cc9999;} #calendarMonth:hover, #calendarYear:hover {border-color:#cc9999;}';
 	document.head.append(cSS);
 	
 	if (!calendarLayer(cES)) {
@@ -33,18 +33,20 @@ function calendarHeader(cE, cY, cM, cA, cZ) {
 	var ret = [];
 	var cAY = parseInt(cA.substr(0, 4));
 	var cZY = parseInt(cZ.substr(0, 4));
-	ret.push('<a href="#" onClick="this.blur(); return calendarUpdate(-1);" id="calendarPrev">&#0171;</a>');
-	ret.push('&nbsp;<select id="calendarMonth" onChange="calendarUpdate(0);">');
+	ret.push('<a href="#" onClick="this.blur(); return calendarUpdate(-1, true);" class="calendarPrev">&#0171;</a>');
+	ret.push('<a href="#" onClick="this.blur(); return calendarUpdate(-1, false);" class="calendarPrev">&#8249;</a>');
+	ret.push('&nbsp;<select id="calendarMonth" onChange="calendarUpdate(0, false);">');
 	for (i=1; i<=12; i++) {
-		ret.push('<option value="' + i + '"' + (cM == i ? ' selected' : '') + '>' + new Date(i + '/01/' + cY).toLocaleString('default', { month: 'long' }) + '</option>');
+		ret.push('<option value="' + i + '"' + (cM == i ? ' selected' : '') + '>' + new Date(i + '/01/' + cY).toLocaleString('default', { month: 'short' }) + '</option>');
 	}
 	ret.push('</select>');
-	ret.push('&nbsp;<select id="calendarYear" onChange="calendarUpdate(0);">');
+	ret.push('&nbsp;<select id="calendarYear" onChange="calendarUpdate(0, false);">');
 	for (i=cZY; i>=cAY; i--) {
 		ret.push('<option value="' + i + '"' + (cY == i ? ' selected' : '') + '>' + i + '</option>');
 	}
 	ret.push('</select>');
-	ret.push('&nbsp;<a href="#" onClick="this.blur(); return calendarUpdate(1);" id="calendarNext">&#0187;</a>');
+	ret.push('&nbsp;<a href="#" onClick="this.blur(); return calendarUpdate(1, false);" class="calendarNext">&#8250;</a>');
+	ret.push('&nbsp;<a href="#" onClick="this.blur(); return calendarUpdate(1, true);" class="calendarNext">&#0187;</a>');
 	return calendarRender(ret);
 }
 function cX (cW) {
@@ -105,13 +107,15 @@ function calendarInit(cE, cY, cM, cA, cZ, cN, cG, cH) {
 function calendarDefault(cE, cN, cG, cA, cZ) {
 	calendarInit(cE, '', '', cA, cZ, cN, cG);
 }
-function calendarUpdate(cD) {
+function calendarUpdate(cD, cL) {
 	cYL = calendarLayer('calendarYear');
 	cML = calendarLayer('calendarMonth');
 	if (cYL && cML) {
 		if (cD != 0) {
 			cYN = cYL.selectedIndex;
-			cMN = cML.selectedIndex + cD;
+			cMN = cML.selectedIndex
+			if (cL) { cYN -= cD; }
+			else { cMN += cD; }
 			if (cMN < 0) { cMN = cML.options.length - 1; cYN++; }
 			else if (cMN >= cML.options.length) { cMN = 0; cYN--; }
 			if (cYN < 0) { cYN = cYL.options.length - 1; }
@@ -188,6 +192,6 @@ function calendarRender(cR) {
 }
 </script>
 </head>
-<body onLoad="calendarDefault('c', 'cn', false, '20200101', '20221231');">
+<body onLoad="calendarDefault('c', 'cn', false, '20150101', '20251231');">
 </body>
 </html>
