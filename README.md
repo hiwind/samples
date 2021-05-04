@@ -34,6 +34,8 @@ tables.css - Backwards compatible classes for tables, table rows, and table cell
 
 twitter_link.php - Add absolute twitter links to usernames and hashtags in text.
 
+var_export.js - Easy readable export of entire JSON object or multi-dimensional array in JavaScript (node.js compatible).
+
 vars.php - Quickly collect backwards compatible GET and POST variables into a single variable.
 
 write_files.php - Easily create, rewrite, append & delete files. Includes a safer method for rewriting files if the content would not be changed.
